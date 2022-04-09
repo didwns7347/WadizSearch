@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="main" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Y6W-OH-hqX" customClass="ViewController" customModule="WadizSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="어떤 프로젝트를 찾고 계신가요?" translatesAutoresizingMaskIntoConstraints="NO" id="TnS-ZR-n6l">
+                                <rect key="frame" x="20" y="74" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="p5q-UU-GYO"/>
+                                </constraints>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ny4-0D-mfu">
+                                <rect key="frame" x="10" y="224" width="394" height="628"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="3dU-kk-IhA" customClass="serchResultViewCell" customModule="WadizSearch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="394" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3dU-kk-IhA" id="Cy3-tq-u4A">
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="81" translatesAutoresizingMaskIntoConstraints="NO" id="7iI-TO-lbk">
+                                <rect key="frame" x="10" y="144" width="394" height="31"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ej-xo-Ea4">
+                                        <rect key="frame" x="0.0" y="0.0" width="77.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="전체"/>
+                                        <connections>
+                                            <action selector="allBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="WRX-u7-Ee2"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzh-7W-tcR">
+                                        <rect key="frame" x="158.5" y="0.0" width="77" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="펀딩"/>
+                                        <connections>
+                                            <action selector="funddingBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Q9a-eF-0Ts"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuG-2z-s7o">
+                                        <rect key="frame" x="316.5" y="0.0" width="77.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="스토어"/>
+                                        <connections>
+                                            <action selector="storeBtnTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="bR7-p7-mt9"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="Ny4-0D-mfu" secondAttribute="bottom" constant="10" id="2h3-BN-CcC"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Ny4-0D-mfu" secondAttribute="trailing" constant="10" id="52w-8i-5mx"/>
+                            <constraint firstItem="7iI-TO-lbk" firstAttribute="top" secondItem="TnS-ZR-n6l" secondAttribute="bottom" constant="20" id="Fdi-0e-L8p"/>
+                            <constraint firstItem="Ny4-0D-mfu" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="OW7-2E-yLC"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="7iI-TO-lbk" secondAttribute="trailing" constant="10" id="YWg-w5-fuN"/>
+                            <constraint firstItem="TnS-ZR-n6l" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="20" id="aJ0-FZ-VfR"/>
+                            <constraint firstItem="7iI-TO-lbk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="10" id="dOo-hY-369"/>
+                            <constraint firstItem="Ny4-0D-mfu" firstAttribute="top" secondItem="TnS-ZR-n6l" secondAttribute="bottom" constant="100" id="gQe-mZ-RuM"/>
+                            <constraint firstItem="TnS-ZR-n6l" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="30" id="lGW-wA-JqW"/>
+                            <constraint firstAttribute="trailing" secondItem="TnS-ZR-n6l" secondAttribute="trailing" constant="20" id="wvW-xN-Dks"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="allBtn" destination="8ej-xo-Ea4" id="NDF-Cm-FaD"/>
+                        <outlet property="fundingBtn" destination="Bzh-7W-tcR" id="Bdx-0S-SDS"/>
+                        <outlet property="searchBar" destination="TnS-ZR-n6l" id="QLY-cR-jeS"/>
+                        <outlet property="storeBtn" destination="wuG-2z-s7o" id="Qex-dO-276"/>
+                        <outlet property="tableView" destination="Ny4-0D-mfu" id="408-ib-KPY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="108.48214285714285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
