@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var resultList:[Product]=[]
     var makeTableList:[Product]=[]
+    //이미지로딩 케시
+    var imgCache : Dictionary<String,UIImage> = [:]
     //var lodingService:LoadingService?
     
     override func viewDidLoad() {
@@ -32,7 +34,12 @@ class ViewController: UIViewController {
         self.fundingBtn.isHidden = true
         
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tableView.allowsSelection = false
+    }
+    
     func openSFSafariView(_ targetURL: String) {
         guard let url = URL(string: targetURL) else { return }
         let safariViewController = SFSafariViewController(url: url)
@@ -56,6 +63,8 @@ class ViewController: UIViewController {
     
     
 }
+
+
 extension ViewController: UITableViewDataSource,UITableViewDelegate{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.makeTableList.count
@@ -71,24 +80,22 @@ extension ViewController: UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath) as? serchResultViewCell else{return UITableViewCell()}
-        cell.titleLabel.numberOfLines = 0
-        cell.tagLabel.numberOfLines = 0
-        cell.titleLabel.isUserInteractionEnabled = true
-        cell.resultImage.isUserInteractionEnabled = true
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.linkTap))
-        
-        if let product = self.makeTableList[indexPath.row] as? Product{
-            cell.titleLabel.text = product.title
-            cell.categoryLabel.text = product.category?.name ?? ""
-            cell.tagLabel.text = product.additionalInfo ?? ""
-            cell.priceLabel.text = String(self.resultList[indexPath.row].price ?? 0)+"원"
-            var imgloader = ImageLoader(url: product.photoURL ?? "")
+        var product = makeTableList[indexPath.row]
+        cell.titleLabel.text = product.title
+        cell.categoryLabel.text = product.category?.name ?? ""
+        cell.tagLabel.text = product.additionalInfo ?? ""
+        cell.priceLabel.text = String(product.price ?? 0)+"원"
+        if (self.imgCache[product.photoURL ?? ""] != nil){
+            cell.resultImage.image = self.imgCache[product.photoURL ?? ""]
+        }else{
+            let imgloader = ImageLoader(url: product.photoURL ?? "")
+            
             imgloader.load { result in
                 switch result{
                 case .success(let img):
                     DispatchQueue.main.async {
                         cell.resultImage.image = img
+                        self.imgCache[product.photoURL ?? ""] = img
                     }
                     
                 case .failure(let error):
@@ -96,15 +103,30 @@ extension ViewController: UITableViewDataSource,UITableViewDelegate{
                         cell.resultImage.image = UIImage(systemName: "Stop")
                     }
                     
+                    
                 }
             }
+        }
+        cell.showLinkAction = { [unowned self] in
+            let product = self.makeTableList[indexPath.row]
+            self.openSFSafariView(product.landingURL)
             
-            
-            return cell
         }
         
+        
+        return cell
+        
+        
     }
-    @IBAction func linkTap(sender:UITapGestureRecognizer){
+    @IBAction func linkImgTapped(sender:UITapGestureRecognizer){
+        guard let img = sender as? UIImageView else {return}
+        print(img.tag)
+    
+        
+    }
+    @IBAction func linkTitleTapped(sender:UITapGestureRecognizer){
+        guard let title = sender as? UILabel else {return}
+        print(title.tag)
         
     }
     
