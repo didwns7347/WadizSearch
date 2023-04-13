@@ -20,6 +20,7 @@ struct NetworkRequest<T: Codable & NetworkResponse> {
     init(path: String, parameters: [String: String]) {
         self.path = path
         self.parameters = parameters
+        
     }
 
     func get(completion: @escaping (Result<T, NetworkError>) -> Void) {
